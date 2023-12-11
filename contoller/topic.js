@@ -1,8 +1,21 @@
 const TOPIC = require('../model/topic');
+const multer = require('multer')
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './public/images')
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+    cb(null,uniqueSuffix + file.originalname)
+  }
+})
+
+const upload = multer({ storage: storage })
 
 exports.AddTopic =async function (req, res, next) {
     try {
-  
+      req.body.image = req.file.filename
       if (!req.body.name || !req.body.description || !req.body.image || !req.body.subcategory) {
         throw new Error("Please Enter Valid Field")
       }

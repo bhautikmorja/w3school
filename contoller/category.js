@@ -18,10 +18,10 @@ exports.AddCategory =  async function (req, res, next) {
     }
   };
 
-  exports.GetCategory = async function (req, res, next) {
+  exports.GetCategories = async function (req, res, next) {
     try {
       const data = await CATEGORY.find()
-      res.status.json({
+      res.status(201).json({
         message: "Data Collect Successfully",
         data
       })
@@ -32,7 +32,7 @@ exports.AddCategory =  async function (req, res, next) {
     }
   };
 
-  exports.DeleteQuiz =async function (req, res, next) {
+  exports.DeleteCategory =async function (req, res, next) {
     try {
       await CATEGORY.findByIdAndDelete(req.query.id)
       res.status(201).json({
@@ -45,7 +45,7 @@ exports.AddCategory =  async function (req, res, next) {
     }
   };
 
-  exports.UpdateQuiz =async function (req, res, next) {
+  exports.UpdateCategory =async function (req, res, next) {
     try {
       await CATEGORY.findByIdAndUpdate(req.query.id, req.body)
       res.status(200).json({

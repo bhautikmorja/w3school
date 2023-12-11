@@ -16,6 +16,7 @@ const storage = multer.diskStorage({
   }
 })
 
+const upload = multer({ storage: storage })
 //category
 //Create
 router.post('/category', categoryController.AddCategory);
@@ -46,7 +47,7 @@ router.put('/subcategory', subcategoryController.AddsubCategory)
 
 //Topic
 //Create
-router.post('/topic',single('image'), topicController.AddTopic)
+router.post('/topic', upload.single('image'), topicController.AddTopic)
 
 //Get
 router.get('/topics', topicController.GetTopic)
